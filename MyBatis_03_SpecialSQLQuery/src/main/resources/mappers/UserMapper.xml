@@ -4,10 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.liuyang.mappers.UserMapper">
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_user
+        VALUES (null,#{userName}, #{password},#{age},#{gender},#{email});
+    </insert>
+    <delete id="batchDelete">
+        delete from t_user where username like concat(#{name},'%')
+    </delete>
 
     <select id="fuzzyQuery" resultType="com.liuyang.pojo.User">
         SELECT *
         FROM t_user
-        WHERE username LIKE '刘%';
+        WHERE username LIKE concat(#{name},'%');
+    </select>
+    <select id="dynamicQueryTableName" resultType="com.liuyang.pojo.User">
+        select * from ${tablename}
     </select>
 </mapper>

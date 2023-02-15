@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liuyang.mappers.UserMapper">
+    
+    <!--<resultMap id="resultMap" type="com.liuyang.pojo.User">-->
+    <!--   <id property="id" column="id"/>-->
+    <!--    <result property="userName" column="user_name"/>-->
+    <!--    <result property="password" column="password"/>-->
+    <!--    <result property="age" column="age"/>-->
+    <!--    <result property="gender" column="gender"/>-->
+    <!--    <result property="email" column="email"/>-->
+    <!--</resultMap>-->
+
+    <!--<select id="getUsers" resultMap="resultMap">-->
+    <!--    select * from t_user-->
+    <!--</select>-->
+
+
+    <select id="getUsers" resultType="com.liuyang.pojo.User">
+        select id, user_name userName from t_user
+    </select>
+</mapper>
