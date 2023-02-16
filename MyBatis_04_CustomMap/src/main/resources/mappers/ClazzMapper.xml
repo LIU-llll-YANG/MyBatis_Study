@@ -4,18 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.liuyang.mappers.ClazzMapper">
-    <select id="queryClassById" resultType="com.liuyang.pojo.Clazz">
-        select *
-        from t_clazz
-        where clazz_id = #{clazzId}
-    </select>
+    <!--<select id="queryClassById" resultType="com.liuyang.pojo.Clazz">-->
+    <!--    select *-->
+    <!--    from t_clazz-->
+    <!--    where clazz_id = #{clazzId}-->
+    <!--</select>-->
 
-    <resultMap id="resultMap" type="com.liuyang.pojo.Clazz">
+ <!--   <resultMap id="resultMap" type="com.liuyang.pojo.Clazz">
         <id column="clazz_id" property="clazzId"/>
         <result column="clazz_name" property="clazzName"/>
         <collection property="students" ofType="com.liuyang.pojo.Student">
             <id column="sid" property="id"/>
-            <id column="sname" property="name"/>
+            <result column="sname" property="name"/>
         </collection>
     </resultMap>
 
@@ -25,6 +25,15 @@
                  left join t_student ts on t_clazz.clazz_id = ts.clazz_id
         where t_clazz.clazz_id = #{clazzId}
 
-    </select>
+    </select>-->
 
+    <resultMap id="result" type="com.liuyang.pojo.Clazz">
+        <id column="clazz_id" property="clazzId"/>
+        <result column="clazz_name" property="clazzName"/>
+        <collection property="students" ofType="com.liuyang.pojo.Student" fetchType="lazy" column="clazz_id" select="com.liuyang.mappers.StudentMapper.selectStudentByClazzId"/>
+    </resultMap>
+
+    <select id="selectClazzById" resultMap="result">
+        select * from t_clazz where clazz_id = #{clazzId}
+    </select>
 </mapper>

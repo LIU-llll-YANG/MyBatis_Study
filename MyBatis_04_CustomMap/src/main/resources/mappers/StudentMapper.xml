@@ -10,11 +10,12 @@
         <result column="sname" property="name"/>
         <!--<result column="clazz_id" property="clazz.clazzId"/>-->
         <!--<result column="clazz_name" property="clazz.clazzName"/>-->
-        <association property="clazz" select="com.liuyang.mappers.ClazzMapper.queryClassById" column="clazz_id">
-        </association>
     </resultMap>
 
-    <select id="queryStudentTheClassById" resultMap="resultMap">
-        select * from t_student where sid = #{id}
+    <!--<select id="queryStudentTheClassById" resultMap="resultMap">-->
+    <!--    select * from t_student where sid = #{id}-->
+    <!--</select>-->
+    <select id="selectStudentByClazzId" resultMap="resultMap">
+        select * from t_student where clazz_id = #{clazzId}
     </select>
 </mapper>
